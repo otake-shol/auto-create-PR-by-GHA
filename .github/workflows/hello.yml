@@ -1,0 +1,21 @@
+name: "Hello deploy"
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - .github/workflows/**
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  preview:
+    name: "Hello"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hello
+        run: echo "hello world"
