@@ -1,0 +1,37 @@
+name: Google Form Trigger
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [google_form_event]
+
+jobs:
+  handle_google_form_event:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Process form data （具体的なファイル操作）
+        run: |
+          echo "${{ github.event.client_payload.field1 }}" > data.txt
+          echo "${{ github.event.client_payload.field2 }}" >> data.txt
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: Update data from Google Form
+          committer: GitHub <noreply@github.com>
+          author: Your Name <your-email@example.com>
+          title: Update data from Google Form
+          body: Automatic PR created from Google Form submission.
+          branch: update-from-google-form
