@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
@@ -25,13 +25,16 @@ jobs:
         run: |
           echo "${{ github.event.client_payload.field1 }}" > data.txt
           echo "${{ github.event.client_payload.field2 }}" >> data.txt
+          date +%s > report.txt
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
+      - name: Create Pull Request （参照 https://github.com/marketplace/actions/create-pull-request）
+        uses: peter-evans/create-pull-request@v6
         with:
-          commit-message: Update data from Google Form
+          commit-message: ${依頼先}からのIP穴あけ対応
           committer: GitHub <noreply@github.com>
           author: Your Name <your-email@example.com>
-          title: Update data from Google Form
+          title: ${依頼先}からのIP穴あけ対応
           body: Automatic PR created from Google Form submission.
-          branch: update-from-google-form
+          branch: feature-add-cidr-block-by-{依頼先}
+          base: develop
+          label: #好みでつける
