@@ -38,10 +38,10 @@ jobs:
       - name: Create Pull Request （参照 https://github.com/marketplace/actions/create-pull-request）
         uses: peter-evans/create-pull-request@v6
         with:
-          commit-message: ${依頼先}からのIP穴あけ対応
+          commit-message: IP穴あけ対応
           committer: GitHub <noreply@github.com>
           author: Your Name <your-email@example.com>
-          title: ${依頼先}からのIP穴あけ対応
+          title: IP穴あけ対応
           body: Automatic PR created from Google Form submission.
-          branch: feature-add-cidr-block-by-{依頼先}
+          branch: feature-add-cidr-block
           base: develop
