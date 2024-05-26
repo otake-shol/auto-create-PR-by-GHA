@@ -45,5 +45,3 @@ jobs:
           body: Automatic PR created from Google Form submission.
           branch: feature-add-cidr-block-by-{依頼先}
           base: develop
-          label: "label" #好みでつける
-
