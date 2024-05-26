@@ -16,6 +16,10 @@ jobs:
   preview:
     name: "Hello"
     runs-on: ubuntu-latest
+
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     steps:
       - name: Hello
         run: echo "hello world"
@@ -35,7 +39,7 @@ jobs:
         run: |
           date +%s > test.txt
 
-      - name: Create Pull Request （参照 https://github.com/marketplace/actions/create-pull-request）
+      - name: Create Pull Request （参照 https://github.com/marketplace/actions/create-pull-request）https://zenn.dev/kshida/articles/auto-generate-release-pr-with-github-actions
         uses: peter-evans/create-pull-request@v6
         with:
           commit-message: ${依頼先}からのIP穴あけ対応
