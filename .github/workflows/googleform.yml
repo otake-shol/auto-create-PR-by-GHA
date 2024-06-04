@@ -19,8 +19,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUBTOKEN }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
@@ -36,14 +34,26 @@ jobs:
           echo "${{ github.event.client_payload.field2 }}" >> data.txt
           date +%s > report.txt
 
+      - name: Create a new branch
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git checkout -b new-branch-name
+          # ここで変更を加えるスクリプトやコマンドを追加
+          echo "Sample change" >> file.txt
+          git add .
+          git commit -m "Add sample change"
+          git push origin new-branch-name
+
       - name: Create Pull Request （参照 https://github.com/marketplace/actions/create-pull-request）
         uses: peter-evans/create-pull-request@v6
         with:
+          token: ${{ secrets.GITHUBTOKEN }}
           commit-message: ${依頼先}からのIP穴あけ対応・SSM設定追加
           committer: GitHub <noreply@github.com>
           author: Your Name <your-email@example.com>
           title: ${依頼先}からのIP穴あけ対応
           body: Automatic PR created from Google Form submission.
           branch: feature-add-cidr-block-by-{依頼先}
-          base: develop
+          base: master
           label: #好みでつける
