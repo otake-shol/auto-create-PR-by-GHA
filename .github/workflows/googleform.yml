@@ -36,8 +36,8 @@ jobs:
 
       - name: Create a new branch
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git config --global user.name 'otake-shol'
+          git config --global user.email 'otkshol@gmail.com'
           git remote set-url origin https://x-access-token:${{secrets.GITHUBTOKEN}}@github.com/otake-shol/auto-create-PR-by-GHA
           git checkout -b feature-add-cidr-block-by-hoge
           # ここで変更を加えるスクリプトやコマンドを追加
