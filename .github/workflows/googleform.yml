@@ -38,18 +38,18 @@ jobs:
         run: |
           git config --global user.name 'otake-shol'
           git config --global user.email 'otkshol@gmail.com'
-          git remote set-url origin https://x-access-token:${{secrets.GITHUBTOKEN}}@github.com/otake-shol/auto-create-PR-by-GHA
+          git remote set-url origin https://x-access-token:${{secrets.GITHUB_TOKEN}}@github.com/otake-shol/auto-create-PR-by-GHA
           git checkout -b feature-add-cidr-block-by-hoge
           # ここで変更を加えるスクリプトやコマンドを追加
           echo "Sample change" >> file.txt
           git add .
           git commit -m "Add sample change"
-          git push https://x-access-token:${{secrets.GITHUBTOKEN}}@github.com/otake-shol/auto-create-PR-by-GHA feature-add-cidr-block-by-hoge
+          git push https://x-access-token:${{secrets.GITHUB_TOKEN}}@github.com/otake-shol/auto-create-PR-by-GHA feature-add-cidr-block-by-hoge
 
       - name: Create Pull Request （参照 https://github.com/marketplace/actions/create-pull-request）
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.GITHUBTOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: ${依頼先}からのIP穴あけ対応・SSM設定追加
           committer: GitHub <noreply@github.com>
           author: Your Name <your-email@example.com>
