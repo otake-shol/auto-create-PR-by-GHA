@@ -44,7 +44,7 @@ jobs:
           echo "Sample change" >> file.txt
           git add .
           git commit -m "Add sample change"
-          git push origin feature-add-cidr-block-by-hoge
+          git push https://x-access-token:${{secrets.GITHUBTOKEN}}@github.com/otake-shol/auto-create-PR-by-GHA feature-add-cidr-block-by-hoge
 
       - name: Create Pull Request （参照 https://github.com/marketplace/actions/create-pull-request）
         uses: peter-evans/create-pull-request@v6
