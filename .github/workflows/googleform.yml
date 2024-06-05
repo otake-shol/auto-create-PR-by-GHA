@@ -54,6 +54,5 @@ jobs:
           author: otake-shol <otkshol@gmail.com>
           title: 依頼先からのIP穴あけ対応
           body: Automatic PR created from Google Form submission.
-          branch: feature-add-cidr-block-by
-          base: master
+          branch: master
           delete-branch: true
