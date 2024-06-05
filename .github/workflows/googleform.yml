@@ -28,8 +28,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Process form data （具体的なファイル操作）
+      - name: Process form data （具体的なファイル操作）# ここで変更を加えるスクリプトやコマンドを追加
         run: |
+          echo "Sample change" >> file.txt
           echo "${{ github.event.client_payload.field1 }}" > data.txt
           echo "${{ github.event.client_payload.field2 }}" >> data.txt
           date +%s > report.txt
@@ -40,8 +41,6 @@ jobs:
           git config --global user.email "otkshol@gmail.com"
           git remote set-url origin https://x-access-token:${{secrets.GHA_TOKEN}}@github.com/otake-shol/auto-create-PR-by-GHA
           git checkout -b feature-add-cidr-block-by-hoge
-          # ここで変更を加えるスクリプトやコマンドを追加
-          echo "Sample change" >> file.txt
           git add .
           git commit -m "Add sample change"
           git push https://x-access-token:${{secrets.GHA_TOKEN}}@github.com/otake-shol/auto-create-PR-by-GHA feature-add-cidr-block-by-hoge
@@ -50,11 +49,11 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GHA_TOKEN }}
-          commit-message: ${依頼先}からのIP穴あけ対応・SSM設定追加
-          committer: GitHub <noreply@github.com>
-          author: Your Name <your-email@example.com>
-          title: ${依頼先}からのIP穴あけ対応
+          commit-message: 依頼先からのIP穴あけ対応・SSM設定追加
+          committer: otake-shol <otkshol@gmail.com>
+          author: otake-shol <otkshol@gmail.com>
+          title: 依頼先からのIP穴あけ対応
           body: Automatic PR created from Google Form submission.
           branch: feature-add-cidr-block-by
           base: master
-          label: #好みでつける
+          delete-branch: true
